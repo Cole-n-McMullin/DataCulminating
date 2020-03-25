@@ -1,40 +1,50 @@
 package culminating;
 
+import java.awt.Color;
+import java.awt.Graphics;
 import java.util.Random;
-import java.util.Scanner;
 
-import javax.swing.JFrame;
+import javax.swing.JPanel;
 
-public class TestMain {
-
-	public static void main(String[] args) {
-		dropBalls();
-		JFrame frame = new JFrame("GaltonBoard");
-		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		frame.setSize(1000, 1000);
-		frame.setVisible(true);
+public class GaltonBoard extends JPanel {
+	
+	private BoardNode[][] nodes;
+	private int rows;
+	public GaltonBoard(int rows) {
+		this.rows = rows;
+		nodes = new BoardNode[rows][rows];
+		for (int i = 1; i < rows; i++) {
+			for( int j = 0; j < i/2; j++) {
+				if (i % 2 == 0) {
+					nodes[i][(i/2)+j] = new BoardNode(500 + j*30, 170 + i*30);
+					nodes[i][(i/2)-(j+1)] = new BoardNode(500 - (j+1)*30, 170 + i*30);
+				}
+				else {
+					if (j == 0) {
+						nodes[i][i/2] = new BoardNode(515 + j*30, 170 + i*30);
+					}
+					nodes[i][(i/2)+(j+1)] = new BoardNode(515 + (j+1)*30, 170 + i*30);
+					nodes[i][(i/2)-(j+1)] = new BoardNode(515 - (j+1)*30, 170 + i*30);
+				}
+			}
+		}		
 	}
-
-	public static void dropBalls() {
-		@SuppressWarnings("resource")
-		Scanner sc = new Scanner(System.in);
-		int input = sc.nextInt();
-		int[] arr = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
-		for (int j = 0; j < input; j++) {
+	
+	public void generatePath() {
+		int[] arr = new int[rows+1];
+		for (int j = 0; j < rows; j++) {
 			Random rnd = new Random();
 			int sum = 0;
 			for (int i = 1; i < 9; i++) {
 				int right = rnd.nextInt(2);
 				sum += right;
 				printNodeLn(i, sum, right);
-//				sum += right;
 			}
-//			System.out.println(sum);
 			arr[sum]++;
 		}
 		printArr(arr);
 	}
-
+	
 	public static void printNodeLn(int numNodes, int curTotal, int right) {
 		// first row
 		System.out.print(" ");
@@ -81,5 +91,15 @@ public class TestMain {
 		}
 		System.out.println();
 	}
-
+	
+	protected void PaintComponent(Graphics g) {
+		super.paintComponent(g);
+		this.setBackground(new Color(0, 0, 0, 0));
+		for (int i = 1; i < rows; i++) {
+			for( int j = 0; j < i; j++) {
+				nodes[i][j].paintComponent(g);
+			}
+		}
+	}
+	
 }
