@@ -36,14 +36,14 @@ public class BoardNode extends JPanel{
 		super.paintComponent(g);
 		this.setBackground(new Color(0, 0, 0, 0));
 		g.setColor(Color.BLACK);
-		g.drawOval(xPos + border, yPos + border, size, size);
+		g.fillOval(xPos + border, yPos + border, size, size);
 		if (left) {
-			g.drawRect(xPos, yPos, 2, 32);
-			g.drawRect(xPos, yPos, 15, 2);
+			g.fillRect(xPos, yPos, 2, 32);
+			g.fillRect(xPos, yPos, 15, 2);
 		}
 		if (right) {
-			g.drawRect(xPos + 28, yPos, 2, 32);
-			g.drawRect(xPos + 15, yPos, 15, 2);
+			g.fillRect(xPos + 28, yPos, 2, 32);
+			g.fillRect(xPos + 15, yPos, 15, 2);
 		}
 	}
 }

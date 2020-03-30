@@ -2,6 +2,7 @@ package culminating;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.GridLayout;
 import java.util.Random;
 
 import javax.swing.JFrame;
@@ -11,10 +12,12 @@ public class GaltonBoard extends JFrame {
 	
 	private BoardNode[][] nodes;
 	private int rows;
+	EndingHolder end;
 
 	public GaltonBoard(int rows) {
 		this.rows = rows;
 		nodes = new BoardNode[rows][rows];
+		
 		
 		for (int i = 1; i < rows; i++) {
 			if (i/2 == 0) {
@@ -47,6 +50,11 @@ public class GaltonBoard extends JFrame {
 				}
 			}
 		}
+		
+		end = new EndingHolder(rows);
+		add(end);
+		revalidate();
+		
 	}
 	
 	public void generatePath() {
@@ -65,8 +73,8 @@ public class GaltonBoard extends JFrame {
 				nodes[j][sum-1].setPathRight();
 			}
 		}
+		end.addBall(sum);
 		paintComponents(getGraphics());
-		arr[sum]++;
 		for (int i = 1; i < rows; i++) {
 			for( int j = 0; j < rows; j++) {
 				if (nodes[i][j]!=null) {
@@ -74,14 +82,6 @@ public class GaltonBoard extends JFrame {
 				}
 			}
 		}
-		printArr(arr);
-	}
-
-	public static void printArr(int[] arr) {
-		for (int i = 0; i < arr.length; i++) {
-			System.out.print(arr[i] + " ");
-		}
-		System.out.println();
 	}
 	
 	public BoardNode[][] getNodes() {
