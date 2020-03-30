@@ -11,7 +11,7 @@ public class TestMain {
 	public static void main(String[] args) {
 		GaltonBoard gb =  new GaltonBoard(8);
 		gb.paintComponents(gb.getGraphics());
-		System.out.println("How many balls areyou dropping?");
+		System.out.println("How many balls are you dropping?");
 		Scanner sc = new Scanner(System.in);
 		int ans = Integer.valueOf(sc.nextLine());
 		for (int i = 0; i < ans; i++) {

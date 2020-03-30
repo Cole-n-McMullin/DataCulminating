@@ -38,16 +38,6 @@ public class GaltonBoard extends JFrame {
 		setSize(1000, 1000);
 		setVisible(true);
 		
-//		for (int i = 1; i < rows; i++) {
-//			for( int j = 0; j < rows; j++) {
-//				if (nodes[i][j]!=null) {
-//					JPanel node = nodes[i][j];
-//					add(node);
-//					revalidate();
-//				}
-//			}
-//		}
-		
 		for (int i = rows-1; i >= 1; i--) {
 			for( int j = rows-1; j >= 0; j--) {
 				if (nodes[i][j]!=null) {
@@ -74,8 +64,6 @@ public class GaltonBoard extends JFrame {
 			if (right == 1) {
 				nodes[j][sum-1].setPathRight();
 			}
-			//revalidate();
-
 		}
 		paintComponents(getGraphics());
 		arr[sum]++;
@@ -88,47 +76,7 @@ public class GaltonBoard extends JFrame {
 		}
 		printArr(arr);
 	}
-//	
-//	public static void printNodeLn(int numNodes, int curTotal, int right) {
-//		// first row
-//		System.out.print(" ");
-//		for (int i = 0; i < numNodes; i++) {
-//			System.out.print("  ");
-//		}
-//		System.out.println();
-//		// second row
-//		
-//		for (int i = 0; i < 8-numNodes; i++) {
-//			System.out.print(" ");
-//		}
-//		
-//		if (curTotal == 0) {
-//			System.out.print("|");
-//		}
-//		else {
-//			System.out.print(" ");
-//		}
-//		for (int i = 0; i < numNodes; i++) {
-//			if (right == 1) {
-//				if (i == curTotal-1) {
-//
-//					System.out.print("0|");
-//				} else {
-//					System.out.print("0 ");
-//				}
-//			} 
-//			else {
-//				if (i == curTotal - 1) {
-//
-//					System.out.print("0|");
-//				} else {
-//					System.out.print("0 ");
-//				}
-//			}
-//		}
-//		System.out.println("   " + curTotal);
-//	}
-//
+
 	public static void printArr(int[] arr) {
 		for (int i = 0; i < arr.length; i++) {
 			System.out.print(arr[i] + " ");
@@ -143,15 +91,5 @@ public class GaltonBoard extends JFrame {
 	public int getRows() {
 		return rows;
 	}
-	
-//	protected void PaintComponent(Graphics g) {
-//		super.paintComponent(g);
-//		this.setBackground(new Color(0, 0, 0, 0));
-//		for (int i = 1; i < rows; i++) {
-//			for( int j = 0; j < i; j++) {
-//				nodes[i][j].paintComponent(g);
-//			}
-//		}
-//	}
 	
 }
