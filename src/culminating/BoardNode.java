@@ -14,24 +14,29 @@ public class BoardNode extends JPanel{
 	private boolean left = false;
 	private boolean right = false;
 
+	//creates a new galtonboard pin
 	public BoardNode(int xPos, int yPos) {
 		this.xPos = xPos;
 		this.yPos = yPos;		
 	}
 	
+	//sets the path left of the pin
 	public void setPathLeft() {
 		left = true;
 	}
 	
+	//sets the path left of the pin
 	public void setPathRight() {
 		right = true;
 	}
 	
+	//removes the path from the pin
 	public void setNoPath() {
 		left = false;
 		right = false;
 	}
 	
+	//paints the galtonboard pin
 	protected void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		this.setBackground(new Color(0, 0, 0, 0));

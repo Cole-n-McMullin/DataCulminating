@@ -14,26 +14,27 @@ public class GaltonBoard extends JFrame {
 	private int rows;
 	EndingHolder end;
 
+	//creates the galtonboard
 	public GaltonBoard(int rows) {
 		this.rows = rows;
 		nodes = new BoardNode[rows][rows];
 		
-		
+		//creating galtonboard pins
 		for (int i = 1; i < rows; i++) {
 			if (i/2 == 0) {
-				nodes[i][i/2] = new BoardNode(485, 170 + i*30);
+				nodes[i][i/2] = new BoardNode(485, i*30);
 			}
 			for( int j = 0; j < i/2; j++) {
 				if (i % 2 == 0) {
-					nodes[i][(i/2)+j] = new BoardNode(500 + j*30, 170 + i*30);
-					nodes[i][(i/2)-(j+1)] = new BoardNode(500 - (j+1)*30, 170 + i*30);
+					nodes[i][(i/2)+j] = new BoardNode(500 + j*30, i*30);
+					nodes[i][(i/2)-(j+1)] = new BoardNode(500 - (j+1)*30,  i*30);
 				}
 				else {
 					if (j == 0) {
-						nodes[i][i/2] = new BoardNode(485 + j*30, 170 + i*30);
+						nodes[i][i/2] = new BoardNode(485 + j*30, i*30);
 					}
-					nodes[i][(i/2)+(j+1)] = new BoardNode(485 + (j+1)*30, 170 + i*30);
-					nodes[i][(i/2)-(j+1)] = new BoardNode(485 - (j+1)*30, 170 + i*30);
+					nodes[i][(i/2)+(j+1)] = new BoardNode(485 + (j+1)*30,  i*30);
+					nodes[i][(i/2)-(j+1)] = new BoardNode(485 - (j+1)*30,  i*30);
 				}
 			}
 		}
@@ -56,7 +57,7 @@ public class GaltonBoard extends JFrame {
 		revalidate();
 		
 	}
-	
+	//generating a single ball's path through the galtonboard
 	public void generatePath() {
 		int[] arr = new int[rows+1];
 		Random rnd = new Random();
@@ -64,17 +65,20 @@ public class GaltonBoard extends JFrame {
 		for (int j = 1; j < rows; j++) {
 			int right = rnd.nextInt(2);
 			sum += right;
-			//left
-			if (right == 0) {
-				nodes[j][sum].setPathLeft();
-			}
-			//right
-			if (right == 1) {
-				nodes[j][sum-1].setPathRight();
-			}
+			//uncomment to display individual ball's paths
+//			//left
+//			if (right == 0) {
+//				nodes[j][sum].setPathLeft();
+//			}
+//			//right
+//			if (right == 1) {
+//				nodes[j][sum-1].setPathRight();
+//			}
 		}
 		end.addBall(sum);
-		paintComponents(getGraphics());
+		end.repaint();
+		//uncomment to display individual ball's paths
+//		paintComponents(getGraphics());
 		for (int i = 1; i < rows; i++) {
 			for( int j = 0; j < rows; j++) {
 				if (nodes[i][j]!=null) {
@@ -82,14 +86,5 @@ public class GaltonBoard extends JFrame {
 				}
 			}
 		}
-	}
-	
-	public BoardNode[][] getNodes() {
-		return nodes;
-	}
-	
-	public int getRows() {
-		return rows;
-	}
-	
+	}	
 }
